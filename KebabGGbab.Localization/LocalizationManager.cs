@@ -13,7 +13,7 @@ namespace KebabGGbab.Localization
 
         public CultureInfo CurrentUICulture
         {
-            get => Thread.CurrentThread.CurrentUICulture;
+            get => CultureInfo.CurrentUICulture;
             set
             {
                 if (CurrentUICulture == value)
@@ -21,9 +21,10 @@ namespace KebabGGbab.Localization
                     return;
                 }
 
-                Thread.CurrentThread.CurrentUICulture = value;
+                CurrentUICultureChangedEventArgs args = new(value, CurrentUICulture);
+                CultureInfo.CurrentUICulture = value;
                 CultureInfo.DefaultThreadCurrentUICulture = value;
-                OnCurrentUICultureChanged();
+                OnCurrentUICultureChanged(args);
             }
         }
         public IReadOnlyList<CultureInfo> Cultures
@@ -32,7 +33,7 @@ namespace KebabGGbab.Localization
         }
 
 
-        public event EventHandler? CurrentUICultureChanged;
+        public event EventHandler<CurrentUICultureChangedEventArgs>? CurrentUICultureChanged;
 
         private LocalizationManager() { }
 
@@ -58,9 +59,9 @@ namespace KebabGGbab.Localization
             _providers.Add(provider);
         }
 
-        private void OnCurrentUICultureChanged()
+        private void OnCurrentUICultureChanged(CurrentUICultureChangedEventArgs args)
         {
-            CurrentUICultureChanged?.Invoke(this, EventArgs.Empty);
+            CurrentUICultureChanged?.Invoke(this, args);
         }
     }
 }
