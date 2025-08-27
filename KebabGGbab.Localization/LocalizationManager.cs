@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using KebabGGbab.Localization.Abstractions;
+using KebabGGbab.Localization.Resources;
 
 namespace KebabGGbab.Localization
 {
@@ -37,19 +38,19 @@ namespace KebabGGbab.Localization
 
         private LocalizationManager() { }
 
-        public bool TryLocalize(string key, out object? result)
+        public object Localize(string key)
         {
+            ArgumentNullException.ThrowIfNull(key, nameof(key));
+
             foreach (ILocalizationProvider provider in _providers)
             {
-                if (provider.TryLocalize(key, out result))
+                if (provider.TryLocalize(key, out object? result))
                 {
-                    return true;
+                    return result!;
                 }
             }
 
-            result = default;
-
-            return false;
+            throw new ResourceNotFoundException(string.Format(CultureInfo.CurrentCulture, Strings.ResourceForLocalizationNotFound, key));
         }
 
         public void AddProvider(ILocalizationProvider provider)
