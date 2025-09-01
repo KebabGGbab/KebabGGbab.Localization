@@ -50,7 +50,7 @@ namespace KebabGGbab.Localization
                 }
             }
 
-            throw new ResourceNotFoundException(string.Format(CultureInfo.CurrentCulture, Strings.ResourceForLocalizationNotFound, key));
+            throw new ResourceNotFoundException(key, string.Format(Strings.ResourceForLocalizationNotFound, key));
         }
 
         public void AddProvider(ILocalizationProvider provider)
