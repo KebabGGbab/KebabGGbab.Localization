@@ -53,11 +53,18 @@ namespace KebabGGbab.Localization
             throw new ResourceNotFoundException(key, string.Format(Strings.ResourceForLocalizationNotFound, key));
         }
 
-        public void AddProvider(ILocalizationProvider provider)
+        public bool AddProvider(ILocalizationProvider provider)
         {
             ArgumentNullException.ThrowIfNull(provider, nameof(provider));
 
-            _providers.Add(provider);
+            return _providers.Add(provider);
+        }
+
+        public bool RemoveProvider(ILocalizationProvider provider)
+        {
+            ArgumentNullException.ThrowIfNull(provider, nameof(provider));
+
+            return _providers.Remove(provider);
         }
 
         private void OnCurrentUICultureChanged(CurrentUICultureChangedEventArgs args)

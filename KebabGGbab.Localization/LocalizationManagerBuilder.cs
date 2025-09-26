@@ -30,8 +30,12 @@ namespace KebabGGbab.Localization
         public ILocalizationManager Build()
         {
             LocalizationManager manager = LocalizationManager.Instance;
-            _providers.ForEach(manager.AddProvider);
             manager.CurrentUICulture = _culture;
+
+            foreach (ILocalizationProvider provider in _providers)
+            {
+                manager.AddProvider(provider);
+            }
 
             return manager;
         }
