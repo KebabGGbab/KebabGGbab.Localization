@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text;
 using KebabGGbab.Localization.Abstractions;
 using KebabGGbab.Localization.Resources;
 
@@ -6,6 +7,8 @@ namespace KebabGGbab.Localization
 {
     public sealed class LocalizationManager : ILocalizationManager
     {
+        private static readonly CompositeFormat _localizationKeyNotFound = CompositeFormat.Parse(Strings.LocalizationKeyNotFound);
+
         private static LocalizationManager? _instance;
 
         public static LocalizationManager Instance => _instance ??= new LocalizationManager();
@@ -50,7 +53,7 @@ namespace KebabGGbab.Localization
                 }
             }
 
-            throw new ResourceNotFoundException(key, string.Format(Strings.ResourceForLocalizationNotFound, key));
+            throw new ResourceNotFoundException(key, string.Format(CultureInfo.CurrentCulture, _localizationKeyNotFound, key));
         }
 
         public bool AddProvider(ILocalizationProvider provider)

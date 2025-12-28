@@ -7,7 +7,7 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<AnalysisMode>default</AnalysisMode>
+		<AnalysisMode>all</AnalysisMode>
 	</PropertyGroup>
 
 	<ItemGroup>
