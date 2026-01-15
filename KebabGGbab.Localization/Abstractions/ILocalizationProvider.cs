@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 namespace KebabGGbab.Localization.Abstractions
 {
@@ -6,6 +7,6 @@ namespace KebabGGbab.Localization.Abstractions
     {
         IReadOnlyList<CultureInfo> Cultures { get; }
 
-        bool TryLocalize(string key, out object? result);
+        bool TryLocalize(string key, [NotNullWhen(true)] out object? result);
     }
 }

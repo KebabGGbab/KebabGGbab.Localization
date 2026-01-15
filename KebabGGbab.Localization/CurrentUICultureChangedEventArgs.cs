@@ -4,8 +4,8 @@ namespace KebabGGbab.Localization
 {
     public class CurrentUICultureChangedEventArgs : EventArgs
     {
-        public CultureInfo NewCulture { get; set; }
-        public CultureInfo OldCulture { get; set; }
+        public CultureInfo NewCulture { get; }
+        public CultureInfo OldCulture { get; }
 
         public CurrentUICultureChangedEventArgs(CultureInfo newCulture, CultureInfo oldCulture)
         {

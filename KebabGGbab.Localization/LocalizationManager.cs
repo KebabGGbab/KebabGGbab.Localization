@@ -9,11 +9,9 @@ namespace KebabGGbab.Localization
     {
         private static readonly CompositeFormat _localizationKeyNotFound = CompositeFormat.Parse(Strings.LocalizationKeyNotFound);
 
-        private static LocalizationManager? _instance;
-
-        public static LocalizationManager Instance => _instance ??= new LocalizationManager();
-
         private readonly HashSet<ILocalizationProvider> _providers = [];
+
+        public static LocalizationManager Instance => field ??= new LocalizationManager();
 
         public CultureInfo CurrentUICulture
         {
@@ -31,10 +29,8 @@ namespace KebabGGbab.Localization
                 OnCurrentUICultureChanged(args);
             }
         }
-        public IReadOnlyList<CultureInfo> Cultures
-        {
-            get => _providers.SelectMany(p => p.Cultures).ToList();
-        }
+
+        public IReadOnlyList<CultureInfo> Cultures => _providers.SelectMany(p => p.Cultures).ToList();
 
 
         public event EventHandler<CurrentUICultureChangedEventArgs>? CurrentUICultureChanged;
@@ -49,25 +45,25 @@ namespace KebabGGbab.Localization
             {
                 if (provider.TryLocalize(key, out object? result))
                 {
-                    return result!;
+                    return result;
                 }
             }
 
             throw new ResourceNotFoundException(key, string.Format(CultureInfo.CurrentCulture, _localizationKeyNotFound, key));
         }
 
-        public bool AddProvider(ILocalizationProvider provider)
+        public void AddProvider(ILocalizationProvider provider)
         {
             ArgumentNullException.ThrowIfNull(provider, nameof(provider));
 
-            return _providers.Add(provider);
+            _providers.Add(provider);
         }
 
-        public bool RemoveProvider(ILocalizationProvider provider)
+        public void RemoveProvider(ILocalizationProvider provider)
         {
             ArgumentNullException.ThrowIfNull(provider, nameof(provider));
 
-            return _providers.Remove(provider);
+            _providers.Remove(provider);
         }
 
         private void OnCurrentUICultureChanged(CurrentUICultureChangedEventArgs args)
