@@ -8,7 +8,7 @@ namespace KebabGGbab.Localization.Abstractions
 
         CultureInfo CurrentUICulture { get; set; }
 
-        event EventHandler<CurrentUICultureChangedEventArgs>? CurrentUICultureChanged;
+        event EventHandler<ILocalizationManager, CurrentUICultureChangedEventArgs>? CurrentUICultureChanged;
 
         object Localize(string key);
     }

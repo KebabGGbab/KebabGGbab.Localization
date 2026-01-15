@@ -33,7 +33,7 @@ namespace KebabGGbab.Localization
         public IReadOnlyList<CultureInfo> Cultures => _providers.SelectMany(p => p.Cultures).ToList();
 
 
-        public event EventHandler<CurrentUICultureChangedEventArgs>? CurrentUICultureChanged;
+        public event EventHandler<ILocalizationManager,CurrentUICultureChangedEventArgs>? CurrentUICultureChanged;
 
         private LocalizationManager() { }
 
