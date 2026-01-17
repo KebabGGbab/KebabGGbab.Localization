@@ -5,7 +5,7 @@ using KebabGGbab.Localization.Abstractions;
 
 namespace KebabGGbab.Localization
 {
-    internal class ResxLocalizationProvider : ILocalizationProvider
+    public class ResxLocalizationProvider : ILocalizationProvider
     {
         private readonly ResourceManager _resourceManager;
 
@@ -19,7 +19,7 @@ namespace KebabGGbab.Localization
 
         public bool TryLocalize(string key, [NotNullWhen(true)] out object? result)
         {
-            result = _resourceManager.GetObject(key, CultureInfo.InvariantCulture);
+            result = _resourceManager.GetObject(key, CultureInfo.CurrentUICulture);
 
             return result != null;
         }
