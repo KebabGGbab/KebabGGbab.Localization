@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="KebabGGbab.Localization/KebabGGbab.Localization.csproj" />
+  <Folder Name="/src/">
+    <Project Path="src/KebabGGbab.Localization/KebabGGbab.Localization.csproj" />
+  </Folder>
 </Solution>

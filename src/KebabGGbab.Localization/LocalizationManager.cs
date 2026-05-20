@@ -2,6 +2,7 @@
 using System.Text;
 using KebabGGbab.Localization.Abstractions;
 using KebabGGbab.Localization.Resources;
+using Localization.Abstractions;
 
 namespace KebabGGbab.Localization
 {
