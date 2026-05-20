@@ -1,7 +1,5 @@
-﻿using System.Globalization;
-using System.Text;
+﻿using System.Text;
 using KebabGGbab.Localization.Providers;
-using KebabGGbab.Localization.Resources;
 
 namespace KebabGGbab.Localization.Manager
 {

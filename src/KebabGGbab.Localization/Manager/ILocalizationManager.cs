@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace KebabGGbab.Localization.Manager
+﻿namespace KebabGGbab.Localization.Manager
 {
     public interface ILocalizationManager
     {

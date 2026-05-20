@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using KebabGGbab.Localization.Providers;
+﻿using KebabGGbab.Localization.Providers;
 
 namespace KebabGGbab.Localization.Manager
 {

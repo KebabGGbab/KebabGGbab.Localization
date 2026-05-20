@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 
 namespace KebabGGbab.Localization.Providers
 {
