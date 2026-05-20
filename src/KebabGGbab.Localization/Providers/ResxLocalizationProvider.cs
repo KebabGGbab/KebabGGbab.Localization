@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Resources;
-using KebabGGbab.Localization.Abstractions;
 
-namespace KebabGGbab.Localization
+namespace KebabGGbab.Localization.Providers
 {
     public class ResxLocalizationProvider : ILocalizationProvider
     {

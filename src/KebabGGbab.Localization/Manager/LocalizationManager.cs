@@ -1,10 +1,9 @@
 ﻿using System.Globalization;
 using System.Text;
-using KebabGGbab.Localization.Abstractions;
+using KebabGGbab.Localization.Providers;
 using KebabGGbab.Localization.Resources;
-using Localization.Abstractions;
 
-namespace KebabGGbab.Localization
+namespace KebabGGbab.Localization.Manager
 {
     public sealed class LocalizationManager : ILocalizationManager
     {

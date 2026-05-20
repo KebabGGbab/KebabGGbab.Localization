@@ -1,4 +1,4 @@
-﻿namespace KebabGGbab.Localization
+﻿namespace KebabGGbab.Localization.Exceptions
 {
     public class ResourceNotFoundException : Exception
     {

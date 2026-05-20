@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace KebabGGbab.Localization
+namespace KebabGGbab.Localization.Manager
 {
     public class CurrentUICultureChangedEventArgs : EventArgs
     {

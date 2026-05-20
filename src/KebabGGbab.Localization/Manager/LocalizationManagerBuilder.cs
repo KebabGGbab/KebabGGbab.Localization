@@ -1,8 +1,7 @@
 ﻿using System.Globalization;
-using KebabGGbab.Localization.Abstractions;
-using Localization.Abstractions;
+using KebabGGbab.Localization.Providers;
 
-namespace KebabGGbab.Localization
+namespace KebabGGbab.Localization.Manager
 {
     public sealed class LocalizationManagerBuilder : ILocalizationManagerBuilder
     {

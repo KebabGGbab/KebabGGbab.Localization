@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace KebabGGbab.Localization.Abstractions
+namespace KebabGGbab.Localization.Providers
 {
     public interface ILocalizationProvider
     {
