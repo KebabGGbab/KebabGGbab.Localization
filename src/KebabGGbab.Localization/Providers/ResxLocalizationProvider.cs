@@ -11,6 +11,9 @@ namespace KebabGGbab.Localization.Providers
 
         public ResxLocalizationProvider(ResourceManager resourceManager, IEnumerable<CultureInfo> cultures)
         {
+            ArgumentNullException.ThrowIfNull(resourceManager);
+            ArgumentNullException.ThrowIfNull(cultures);
+
             _resourceManager = resourceManager;
             Cultures = [.. cultures];
         }
