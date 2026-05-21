@@ -61,11 +61,11 @@ namespace KebabGGbab.Localization.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на The requested resource was not found. Key: &quot;{0}&quot;..
+        ///   Ищет локализованную строку, похожую на The key &apos;{0}&apos; was not found in any localization provider..
         /// </summary>
-        internal static string LocalizationKeyNotFound {
+        internal static string ResourceNotFoundExceptionMessage {
             get {
-                return ResourceManager.GetString("LocalizationKeyNotFound", resourceCulture);
+                return ResourceManager.GetString("ResourceNotFoundExceptionMessage", resourceCulture);
             }
         }
         

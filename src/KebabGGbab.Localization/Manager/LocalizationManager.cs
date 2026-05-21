@@ -6,7 +6,7 @@ namespace KebabGGbab.Localization.Manager
 {
     public sealed class LocalizationManager : ILocalizationManager
     {
-        private static readonly CompositeFormat _localizationKeyNotFound = CompositeFormat.Parse(ExceptionMessages.LocalizationKeyNotFound);
+        private static readonly CompositeFormat _localizationKeyNotFound = CompositeFormat.Parse(ExceptionMessages.ResourceNotFoundExceptionMessage);
 
         private readonly List<ILocalizationProvider> _providers;
         private readonly ICultureService _cultureService;
