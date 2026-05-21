@@ -4,8 +4,8 @@ namespace KebabGGbab.Localization.Providers
 {
     public interface ILocalizationProvider
     {
-        IReadOnlyList<CultureInfo> Cultures { get; }
+        IReadOnlyList<CultureInfo> SupportedCultures { get; }
 
-        bool TryLocalize(string key, [NotNullWhen(true)] out object? result);
+        bool TryLocalize(string key, CultureInfo culture, [NotNullWhen(true)] out object? result);
     }
 }

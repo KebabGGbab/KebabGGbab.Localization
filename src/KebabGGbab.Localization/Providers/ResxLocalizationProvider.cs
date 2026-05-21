@@ -7,20 +7,20 @@ namespace KebabGGbab.Localization.Providers
     {
         private readonly ResourceManager _resourceManager;
 
-        public IReadOnlyList<CultureInfo> Cultures { get; }
+        public IReadOnlyList<CultureInfo> SupportedCultures { get; }
 
-        public ResxLocalizationProvider(ResourceManager resourceManager, IEnumerable<CultureInfo> cultures)
+        public ResxLocalizationProvider(ResourceManager resourceManager, IEnumerable<CultureInfo> supportedCultures)
         {
             ArgumentNullException.ThrowIfNull(resourceManager);
-            ArgumentNullException.ThrowIfNull(cultures);
+            ArgumentNullException.ThrowIfNull(supportedCultures);
 
             _resourceManager = resourceManager;
-            Cultures = [.. cultures];
+            SupportedCultures = [.. supportedCultures];
         }
 
-        public bool TryLocalize(string key, [NotNullWhen(true)] out object? result)
+        public bool TryLocalize(string key, CultureInfo culture, [NotNullWhen(true)] out object? result)
         {
-            result = _resourceManager.GetObject(key, CultureInfo.CurrentUICulture);
+            result = _resourceManager.GetObject(key, culture);
 
             return result != null;
         }
