@@ -7,8 +7,8 @@
 
         public CurrentUICultureChangedEventArgs(CultureInfo newCulture, CultureInfo oldCulture)
         {
-            ArgumentNullException.ThrowIfNull(newCulture, nameof(newCulture));
-            ArgumentNullException.ThrowIfNull(oldCulture, nameof(oldCulture));
+            ArgumentNullException.ThrowIfNull(newCulture);
+            ArgumentNullException.ThrowIfNull(oldCulture);
 
             NewCulture = newCulture;
             OldCulture = oldCulture;

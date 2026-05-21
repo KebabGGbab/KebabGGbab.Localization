@@ -45,7 +45,7 @@ namespace KebabGGbab.Localization.Manager
 
         public object Localize(string key)
         {
-            ArgumentNullException.ThrowIfNull(key, nameof(key));
+            ArgumentNullException.ThrowIfNull(key);
 
             foreach (ILocalizationProvider provider in _providers)
             {
@@ -60,14 +60,14 @@ namespace KebabGGbab.Localization.Manager
 
         public void AddProvider(ILocalizationProvider provider)
         {
-            ArgumentNullException.ThrowIfNull(provider, nameof(provider));
+            ArgumentNullException.ThrowIfNull(provider);
 
             _providers.Add(provider);
         }
 
         public void RemoveProvider(ILocalizationProvider provider)
         {
-            ArgumentNullException.ThrowIfNull(provider, nameof(provider));
+            ArgumentNullException.ThrowIfNull(provider);
 
             _providers.Remove(provider);
         }
