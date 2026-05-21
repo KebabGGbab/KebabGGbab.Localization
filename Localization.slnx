@@ -1,11 +1,12 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="global.json" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/KebabGGbab.Localization/KebabGGbab.Localization.csproj" />
   </Folder>
   <Folder Name="/test/">
     <Project Path="test/KebabGGbab.Localization.Test/KebabGGbab.Localization.Test.csproj" Id="1267246e-a6ba-4b6a-89a2-7c8855d45774" />
-  </Folder>
-  <Folder Name="/Элементы решения/">
-    <File Path="global.json" />
   </Folder>
 </Solution>

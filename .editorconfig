@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# IDE0305: Упростите инициализацию коллекции
+dotnet_diagnostic.IDE0305.severity = none
+
+# CA1003: Используйте экземпляры обработчика универсальных событий
+dotnet_diagnostic.CA1003.severity = none

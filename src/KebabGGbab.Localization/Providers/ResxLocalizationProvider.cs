@@ -18,7 +18,7 @@ namespace KebabGGbab.Localization.Providers
             ArgumentNullException.ThrowIfNull(supportedCultures);
 
             _resourceManager = resourceManager;
-            SupportedCultures = [.. supportedCultures];
+            SupportedCultures = supportedCultures.ToList();
         }
 
         public bool TryLocalize(string key, CultureInfo culture, [NotNullWhen(true)] out object? result)
