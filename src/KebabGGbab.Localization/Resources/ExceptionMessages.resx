@@ -120,4 +120,7 @@
   <data name="LocalizationKeyNotFound" xml:space="preserve">
     <value>The requested resource was not found. Key: "{0}".</value>
   </data>
+  <data name="ResourceNotSupportedExceptionMessage" xml:space="preserve">
+    <value>Culture '{0}' is not supported by the localization provider.</value>
+  </data>
 </root>

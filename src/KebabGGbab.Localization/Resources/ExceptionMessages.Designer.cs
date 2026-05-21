@@ -68,5 +68,14 @@ namespace KebabGGbab.Localization.Resources {
                 return ResourceManager.GetString("LocalizationKeyNotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Culture &apos;{0}&apos; is not supported by the localization provider..
+        /// </summary>
+        internal static string ResourceNotSupportedExceptionMessage {
+            get {
+                return ResourceManager.GetString("ResourceNotSupportedExceptionMessage", resourceCulture);
+            }
+        }
     }
 }
