@@ -7,7 +7,7 @@ namespace KebabGGbab.Localization.Manager
     {
         private static readonly CompositeFormat _localizationKeyNotFound = CompositeFormat.Parse(ExceptionMessages.LocalizationKeyNotFound);
 
-        private readonly HashSet<ILocalizationProvider> _providers = [];
+        private readonly List<ILocalizationProvider> _providers;
 
         public static LocalizationManager Instance => field ??= new LocalizationManager();
 
@@ -28,6 +28,7 @@ namespace KebabGGbab.Localization.Manager
             }
         }
 
+        public IReadOnlyList<ILocalizationProvider> Providers => _providers.AsReadOnly();
         public IReadOnlyList<CultureInfo> Cultures => _providers.SelectMany(p => p.Cultures).ToList();
 
 
