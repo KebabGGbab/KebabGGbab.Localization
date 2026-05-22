@@ -4,20 +4,18 @@
     {
         public string? Key { get; }
 
-        public ResourceNotFoundException() 
-            : base() 
+        public ResourceNotFoundException()
         { 
         }
 
-        public ResourceNotFoundException(string? message) 
+        public ResourceNotFoundException(string? message)
             : base(message) 
         { 
         }
 
-        public ResourceNotFoundException(string key,  string? message) 
-            : base(message) 
-        { 
-            Key = key;
+        public ResourceNotFoundException(string? key,  string? message) 
+            : this(key, message, null) 
+        {
         }
 
         public ResourceNotFoundException(string? message, Exception? innerException) 
@@ -25,7 +23,7 @@
         { 
         }
 
-        public ResourceNotFoundException (string key, string? message, Exception? innerException)
+        public ResourceNotFoundException (string? key, string? message, Exception? innerException)
             : base (message, innerException)
         {
             Key = key;

@@ -9,8 +9,8 @@
         }
 
         public CultureNotSupportedException(CultureInfo? culture)
+            : this(culture, null, null)
         {
-            Culture = culture;
         }
 
         public CultureNotSupportedException(string? message) 
@@ -19,9 +19,8 @@
         }
 
         public CultureNotSupportedException(CultureInfo? culture, string? message)
-            : base(message)
+            : this(culture, message, null)
         {
-            Culture = culture;
         }
 
         public CultureNotSupportedException(string? message, Exception? innerException) 
