@@ -12,4 +12,19 @@
     <ProjectReference Include="..\..\src\KebabGGbab.Localization\KebabGGbab.Localization.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Data\ResxData.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResxData.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Data\ResxData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResxData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
