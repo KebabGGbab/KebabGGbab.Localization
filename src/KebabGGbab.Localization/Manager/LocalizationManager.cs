@@ -6,8 +6,6 @@ namespace KebabGGbab.Localization.Manager
 {
     public sealed class LocalizationManager : ILocalizationManager
     {
-        private static readonly CompositeFormat _localizationKeyNotFound = CompositeFormat.Parse(ExceptionMessages.ResourceNotFoundExceptionMessage);
-
         private readonly List<ILocalizationProvider> _providers;
         private readonly ICultureService _cultureService;
 
@@ -55,7 +53,7 @@ namespace KebabGGbab.Localization.Manager
                 }
             }
 
-            throw new ResourceNotFoundException(key, string.Format(CultureInfo.CurrentCulture, _localizationKeyNotFound, key));
+            throw new ResourceNotFoundException(key, null, null);
         }
 
         public void AddProvider(ILocalizationProvider provider)

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace KebabGGbab.Localization.Exceptions
 {
@@ -31,6 +32,14 @@ namespace KebabGGbab.Localization.Exceptions
             : base (message ?? string.Format(CultureInfo.InvariantCulture, _localizationKeyNotFound, key), innerException)
         {
             Key = key;
+        }
+
+        public static void ThrowIfResourceNotFound([DoesNotReturnIf(false)] bool isFounded, string? key)
+        {
+            if (isFounded == false)
+            {
+                throw new ResourceNotFoundException(key, null, null);
+            }
         }
     }
 }

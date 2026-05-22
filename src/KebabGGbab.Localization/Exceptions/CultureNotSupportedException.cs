@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace KebabGGbab.Localization.Exceptions
 {
@@ -41,6 +42,14 @@ namespace KebabGGbab.Localization.Exceptions
             : base(message ?? string.Format(CultureInfo.InvariantCulture, _cultureNotSupportedExceptionMessage, culture?.Name), innerException)
         {
             Culture = culture;
+        }
+
+        public static void ThrowIfCultureNotSupported([DoesNotReturnIf(false)] bool isSupported, CultureInfo culture)
+        {
+            if (isSupported == false)
+            {
+                throw new CultureNotSupportedException(culture);
+            }
         }
     }
 }
