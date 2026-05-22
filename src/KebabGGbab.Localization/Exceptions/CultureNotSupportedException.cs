@@ -8,7 +8,7 @@
         {
         }
 
-        public CultureNotSupportedException(CultureInfo culture)
+        public CultureNotSupportedException(CultureInfo? culture)
         {
             Culture = culture;
         }
@@ -18,7 +18,7 @@
         {
         }
 
-        public CultureNotSupportedException(CultureInfo culture, string? message)
+        public CultureNotSupportedException(CultureInfo? culture, string? message)
             : base(message)
         {
             Culture = culture;
@@ -29,7 +29,7 @@
         {
         }
 
-        public CultureNotSupportedException(CultureInfo culture, string? message, Exception? innerException)
+        public CultureNotSupportedException(CultureInfo? culture, string? message, Exception? innerException)
             : base(message, innerException)
         {
             Culture = culture;
