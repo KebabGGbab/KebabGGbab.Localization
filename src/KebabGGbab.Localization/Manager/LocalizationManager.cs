@@ -10,7 +10,7 @@ namespace KebabGGbab.Localization.Manager
 
         public CultureInfo CurrentUICulture
         {
-            get => CultureInfo.CurrentUICulture;
+            get => _cultureService.CurrentUICulture;
             set
             {
                 CultureInfo oldCulture = CurrentUICulture;
