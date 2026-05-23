@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Resources;
-using KebabGGbab.Localization.Exceptions;
 using KebabGGbab.Localization.Providers;
 using KebabGGbab.Localization.Test.Data;
 
@@ -94,7 +93,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
         }
 
         [TestMethod]
-        public void TryLocalize_CultureIsNotSupported_Throw()
+        public void TryLocalize_CultureIsNotSupported_ValueForDefaultCulture()
         {
             string key = "FirstKey";
             CultureInfo culture = CultureInfo.GetCultureInfo("de-DE");
@@ -102,9 +101,10 @@ namespace KebabGGbab.Localization.Test.TestClasses
             List<CultureInfo> cultures = [CultureInfo.GetCultureInfo("en-US"), CultureInfo.GetCultureInfo("fr-FR")];
             ResxLocalizationProvider provider = new(manager, cultures);
 
-            void action() => provider.TryLocalize(key, culture, out object? result);
+            bool isSuccess = provider.TryLocalize(key, culture, out object? result);
 
-            Assert.ThrowsExactly<CultureNotSupportedException>(action);
+            Assert.IsTrue(isSuccess);
+            Assert.AreEqual("FirstValue", result);
         }
 
         [TestMethod]

@@ -21,7 +21,6 @@ namespace KebabGGbab.Localization.Providers
         public bool TryLocalize(string key, CultureInfo culture, [NotNullWhen(true)] out object? result)
         {
             ArgumentNullException.ThrowIfNull(culture);
-            CultureNotSupportedException.ThrowIfCultureNotSupported(SupportedCultures.Contains(culture), culture);
 
             result = _resourceManager.GetObject(key, culture);
 
