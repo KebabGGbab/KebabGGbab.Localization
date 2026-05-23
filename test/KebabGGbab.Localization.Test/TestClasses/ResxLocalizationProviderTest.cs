@@ -13,7 +13,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
         public void Ctor_ResourceManagerIsNull_Throw()
         {
             ResourceManager manager = null!;
-            List<CultureInfo> cultures = [CultureInfo.CurrentCulture, CultureInfo.GetCultureInfo("fr-FR")];
+            List<CultureInfo> cultures = [CultureInfo.GetCultureInfo("en-US"), CultureInfo.GetCultureInfo("fr-FR")];
 
             void action() => _ = new ResxLocalizationProvider(manager, cultures);
 
@@ -69,7 +69,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
         public void TryLocalize_KeyIsNull_Throw()
         {
             string key = null!;
-            CultureInfo culture = CultureInfo.CurrentCulture;
+            CultureInfo culture = CultureInfo.GetCultureInfo("en-US");
             ResourceManager manager = ResxData.ResourceManager;
             List<CultureInfo> cultures = [culture, CultureInfo.GetCultureInfo("fr-FR")];
             ResxLocalizationProvider provider = new(manager, cultures);
@@ -85,7 +85,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
             string key = "FirstKey";
             CultureInfo culture = null!;
             ResourceManager manager = ResxData.ResourceManager;
-            List<CultureInfo> cultures = [CultureInfo.CurrentCulture, CultureInfo.GetCultureInfo("fr-FR")];
+            List<CultureInfo> cultures = [CultureInfo.GetCultureInfo("en-US"), CultureInfo.GetCultureInfo("fr-FR")];
             ResxLocalizationProvider provider = new(manager, cultures);
 
             void action() => provider.TryLocalize(key, culture, out object? result);
@@ -99,7 +99,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
             string key = "FirstKey";
             CultureInfo culture = CultureInfo.GetCultureInfo("de-DE");
             ResourceManager manager = ResxData.ResourceManager;
-            List<CultureInfo> cultures = [CultureInfo.CurrentCulture, CultureInfo.GetCultureInfo("fr-FR")];
+            List<CultureInfo> cultures = [CultureInfo.GetCultureInfo("en-US"), CultureInfo.GetCultureInfo("fr-FR")];
             ResxLocalizationProvider provider = new(manager, cultures);
 
             void action() => provider.TryLocalize(key, culture, out object? result);

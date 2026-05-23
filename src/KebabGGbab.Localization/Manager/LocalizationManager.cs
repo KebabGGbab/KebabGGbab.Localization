@@ -1,5 +1,4 @@
-﻿using System.Text;
-using KebabGGbab.Localization.CultureService;
+﻿using KebabGGbab.Localization.CultureService;
 using KebabGGbab.Localization.Providers;
 
 namespace KebabGGbab.Localization.Manager

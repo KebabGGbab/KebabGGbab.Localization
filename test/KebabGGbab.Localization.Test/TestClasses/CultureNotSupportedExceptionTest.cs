@@ -114,7 +114,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
         {
             bool isSupported = true;
 
-            CultureNotSupportedException.ThrowIfCultureNotSupported(isSupported, CultureInfo.CurrentCulture);
+            CultureNotSupportedException.ThrowIfCultureNotSupported(isSupported, CultureInfo.GetCultureInfo("en-US"));
         }
 
         [TestMethod]
@@ -122,7 +122,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
         {
             bool isSupported = false;
 
-            void action() => CultureNotSupportedException.ThrowIfCultureNotSupported(isSupported, CultureInfo.CurrentCulture);
+            void action() => CultureNotSupportedException.ThrowIfCultureNotSupported(isSupported, CultureInfo.GetCultureInfo("en-US"));
 
             Assert.ThrowsExactly<CultureNotSupportedException>(action);
         }

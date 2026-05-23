@@ -21,20 +21,22 @@ namespace KebabGGbab.Localization.Test.TestClasses
             ThreadCultureService service = new();
             CultureInfo newCulture = CultureInfo.GetCultureInfo("fr-FR");
 
-            service.ChangeCurrentUICulture(newCulture);
+            bool result = service.ChangeCurrentUICulture(newCulture);
 
             Assert.AreEqual(CultureInfo.CurrentUICulture, newCulture);
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void ChangeCurrentUICulture_PassCurrentCulture_Equals()
+        public void ChangeCurrentUICulture_PassCurrentCulture_NotChanged()
         {
             ThreadCultureService service = new();
             CultureInfo newCulture = CultureInfo.CurrentUICulture;
 
-            service.ChangeCurrentUICulture(newCulture);
+            bool result = service.ChangeCurrentUICulture(newCulture);
 
             Assert.AreEqual(CultureInfo.CurrentUICulture, newCulture);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
