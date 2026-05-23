@@ -25,7 +25,7 @@ namespace KebabGGbab.Localization.Manager
 
         public IReadOnlyList<ILocalizationProvider> Providers => _providers.AsReadOnly();
 
-        public IReadOnlyList<CultureInfo> Cultures => _providers.SelectMany(p => p.SupportedCultures).ToList();
+        public IReadOnlyList<CultureInfo> Cultures => _providers.SelectMany(p => p.SupportedCultures).ToList().AsReadOnly();
 
         public event EventHandler<ILocalizationManager,CurrentUICultureChangedEventArgs>? CurrentUICultureChanged;
 
