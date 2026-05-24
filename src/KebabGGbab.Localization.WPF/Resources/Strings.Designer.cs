@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KebabGGbab.WPF.Extensions.Resources.Strings {
+namespace KebabGGbab.Localization.WPF.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace KebabGGbab.WPF.Extensions.Resources.Strings {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class S_LocalizationService {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal S_LocalizationService() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace KebabGGbab.WPF.Extensions.Resources.Strings {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KebabGGbab.WPF.Extensions.Resources.Strings.S_LocalizationService", typeof(S_LocalizationService).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KebabGGbab.Localization.WPF.Resources.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,11 @@ namespace KebabGGbab.WPF.Extensions.Resources.Strings {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Resource placeholder &quot;{0}&quot;..
+        ///   Ищет локализованную строку, похожую на Resource placeholder &apos;{0}&apos;..
         /// </summary>
-        internal static string ResourcePlaceholder {
+        internal static string LocalizationListenerPlaceholderFormat {
             get {
-                return ResourceManager.GetString("ResourcePlaceholder", resourceCulture);
+                return ResourceManager.GetString("LocalizationListenerPlaceholderFormat", resourceCulture);
             }
         }
     }

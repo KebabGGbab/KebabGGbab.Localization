@@ -2,16 +2,15 @@
 using System.Globalization;
 using System.Text;
 using KebabGGbab.Localization;
-using KebabGGbab.WPF.Extensions.Resources.Strings;
+using KebabGGbab.Localization.WPF.Resources;
 
 namespace KebabGGbab.WPF.Extensions.Services.Localization
 {
     public class LocalizationListener : BaseLocalizationListener, INotifyPropertyChanged
     {
-        private static readonly CompositeFormat _resourcePlaceholder = CompositeFormat.Parse(S_LocalizationService.ResourcePlaceholder);
+        private static readonly CompositeFormat _resourcePlaceholder = CompositeFormat.Parse(Strings.LocalizationListenerPlaceholderFormat);
 
         private readonly string _key;
-        private readonly object[]? _args;
 
         public object Value 
         { 

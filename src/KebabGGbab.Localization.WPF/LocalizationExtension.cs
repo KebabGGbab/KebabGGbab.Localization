@@ -32,7 +32,7 @@ namespace KebabGGbab.WPF.Extensions.Services.Localization
                 Source = listener,
                 Path = new PropertyPath(nameof(LocalizationListener.Value)),
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                FallbackValue = S_LocalizationService.ResourcePlaceholder,
+                FallbackValue = Strings.LocalizationListenerPlaceholderFormat,
             };
 
             return binding.ProvideValue(serviceProvider);
