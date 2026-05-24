@@ -4,6 +4,7 @@
     <File Path="global.json" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="src/KebabGGbab.Localization.WPF/KebabGGbab.Localization.WPF.csproj" Id="4effa5dd-bc88-45ee-8769-d693ad0cb3d3" />
     <Project Path="src/KebabGGbab.Localization/KebabGGbab.Localization.csproj" />
   </Folder>
   <Folder Name="/test/">
