@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 using System.Text;
-using KebabGGbab.Localization;
 using KebabGGbab.Localization.WPF.Resources;
 
-namespace KebabGGbab.WPF.Extensions.Services.Localization
+namespace KebabGGbab.Localization.WPF
 {
     public class LocalizationListener : BaseLocalizationListener, INotifyPropertyChanged
     {

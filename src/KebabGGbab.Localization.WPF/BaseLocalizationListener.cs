@@ -1,8 +1,7 @@
 ﻿using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
-using KebabGGbab.Localization;
 
-namespace KebabGGbab.WPF.Extensions.Services.Localization
+namespace KebabGGbab.Localization.WPF
 {
     public abstract class BaseLocalizationListener : ObservableObject, IWeakEventListener, IDisposable
     {

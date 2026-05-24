@@ -1,8 +1,6 @@
 ﻿using System.Windows;
-using KebabGGbab.Localization;
-using KebabGGbab.Localization.Abstractions;
 
-namespace KebabGGbab.WPF.Extensions.Services.Localization
+namespace KebabGGbab.Localization.WPF
 {
     public sealed class CurrentUICultureChangedEventManager : WeakEventManager
     {

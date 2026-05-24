@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
-using KebabGGbab.WPF.Extensions.Resources.Strings;
+using KebabGGbab.Localization.WPF.Resources;
 
-namespace KebabGGbab.WPF.Extensions.Services.Localization
+namespace KebabGGbab.Localization.WPF
 {
     [MarkupExtensionReturnType(typeof(object))]
     public class LocalizationExtension : MarkupExtension
