@@ -1,19 +1,20 @@
 ﻿using System.Windows;
+using KebabGGbab.Localization.Manager;
 
 namespace KebabGGbab.Localization.WPF
 {
-    public sealed class CurrentUICultureChangedEventManager : WeakEventManager
+    public sealed class CurrentUICultureChangedWeakEventManager : WeakEventManager
     {
-        private static CurrentUICultureChangedEventManager CurrentManager
+        private static CurrentUICultureChangedWeakEventManager CurrentManager
         {
             get
             {
-                Type managerType = typeof(CurrentUICultureChangedEventManager);
-                CurrentUICultureChangedEventManager manager = (CurrentUICultureChangedEventManager)GetCurrentManager(managerType);
+                Type managerType = typeof(CurrentUICultureChangedWeakEventManager);
+                CurrentUICultureChangedWeakEventManager manager = (CurrentUICultureChangedWeakEventManager)GetCurrentManager(managerType);
 
                 if (manager == null)
                 {
-                    manager = new CurrentUICultureChangedEventManager();
+                    manager = new CurrentUICultureChangedWeakEventManager();
                     SetCurrentManager(managerType, manager);
                 } 
 
@@ -21,20 +22,20 @@ namespace KebabGGbab.Localization.WPF
             }
         }
 
-        private CurrentUICultureChangedEventManager() { }
+        private CurrentUICultureChangedWeakEventManager() { }
 
         public static void AddListener(ILocalizationManager source, IWeakEventListener listener)
         {
-            ArgumentNullException.ThrowIfNull(source, nameof(source));
-            ArgumentNullException.ThrowIfNull(listener, nameof(listener));
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(listener);
 
             CurrentManager.ProtectedAddListener(source, listener);
         }
 
         public static void RemoveListener(ILocalizationManager source, IWeakEventListener listener)
         {
-            ArgumentNullException.ThrowIfNull(source, nameof(source));
-            ArgumentNullException.ThrowIfNull(listener, nameof(listener));
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(listener);
 
             CurrentManager.ProtectedRemoveListener(source, listener);
         }
