@@ -1,34 +1,46 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows;
+using KebabGGbab.Localization.Exceptions;
+using KebabGGbab.Localization.Manager;
 using KebabGGbab.Localization.WPF.Resources;
 
 namespace KebabGGbab.Localization.WPF
 {
-    public class LocalizationListener : BaseLocalizationListener, INotifyPropertyChanged
+    public sealed class LocalizationListener : INotifyPropertyChanged, IWeakEventListener, IDisposable
     {
         private static readonly CompositeFormat _resourcePlaceholder = CompositeFormat.Parse(Strings.LocalizationListenerPlaceholderFormat);
 
-        private readonly string _key;
+        private bool _disposed;
+
+        public string Key { get; }
 
         public object Value 
         { 
-            get => field;
-            private set => SetProperty(ref field, value);
+            get;
+            set => SetProperty(ref field, value);
         }
 
-        public LocalizationListener(string key, object[]? args)
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public LocalizationListener(string key) 
         {
-            _key = key;
-            _args = args;
-            Value = SetValue();
+            ArgumentNullException.ThrowIfNull(key);
+
+            Key = key;
+            Value = GetValue();
+            // Я бы хотел уйти от Singlton. Это произойдет тогда, когда я решу как лучше передавать ILocalizationManager в расширение xaml
+            CurrentUICultureChangedWeakEventManager.AddListener(LocalizationManager.Instance, this);
         }
 
-        public override bool ReceiveWeakEvent(Type managerType, object sender, EventArgs e)
+        public bool ReceiveWeakEvent(Type managerType, object sender, EventArgs e)
         {
-            if (managerType == typeof(CurrentUICultureChangedEventManager))
+            if (managerType == typeof(CurrentUICultureChangedWeakEventManager))
             {
-                Value = SetValue();
+                Value = GetValue();
 
                 return true;
             }
@@ -36,25 +48,66 @@ namespace KebabGGbab.Localization.WPF
             return false;
         }
 
-        private object SetValue()
+        private object GetValue()
         {
             try
             {
-                object value = LocalizationManager.Instance.Localize(_key);
-
-                if (value is string str && _args != null)
-                {
-                    return string.Format(str, _args);
-                }
-                else
-                {
-                    return value;
-                }
+                return LocalizationManager.Instance.Localize(Key);
             }
             catch (ResourceNotFoundException ex)
             {
                 return string.Format(CultureInfo.InvariantCulture, _resourcePlaceholder, ex.Key);
             }
+        }
+
+        private bool SetProperty<T>([NotNullIfNotNull(nameof(newValue))] ref T field, T newValue, [CallerMemberName] string? propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, newValue))
+            {
+                return false;
+            }
+
+            field = newValue;
+            OnPropertyChanged(propertyName);
+
+            return true;
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            ArgumentNullException.ThrowIfNull(args);
+
+            PropertyChanged?.Invoke(this, args);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+             _disposed = true;
+
+            if (disposing)
+            {
+                CurrentUICultureChangedWeakEventManager.RemoveListener(LocalizationManager.Instance, this);
+            }
+        }
+
+        ~LocalizationListener()
+        {
+            Dispose(false);
         }
     }
 }
