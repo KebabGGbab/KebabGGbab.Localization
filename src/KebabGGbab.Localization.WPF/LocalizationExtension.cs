@@ -8,25 +8,23 @@ namespace KebabGGbab.Localization.WPF
     [MarkupExtensionReturnType(typeof(object))]
     public class LocalizationExtension : MarkupExtension
     {
-        public required string Key { get; set; }
-        public object[]? Arguments { get; set; }
 
-        public LocalizationExtension() { }
+        public string Key { get; set; }
 
         public LocalizationExtension(string key)
         {
+            ArgumentNullException.ThrowIfNull(key);
+
             Key = key;
         }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            ArgumentNullException.ThrowIfNull(serviceProvider, nameof(serviceProvider));
-
+            ArgumentNullException.ThrowIfNull(serviceProvider);
             IProvideValueTarget? target = (IProvideValueTarget?)serviceProvider.GetService(typeof(IProvideValueTarget));
+            ArgumentNullException.ThrowIfNull(target);
 
-            ArgumentNullException.ThrowIfNull(target, nameof(target));
-
-            LocalizationListener listener = new(Key, Arguments);
+            LocalizationListener listener = new(Key);
             Binding binding = new()
             {
                 Source = listener,
