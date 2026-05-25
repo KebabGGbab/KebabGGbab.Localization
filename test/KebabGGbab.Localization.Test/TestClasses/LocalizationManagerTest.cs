@@ -39,6 +39,29 @@ namespace KebabGGbab.Localization.Test.TestClasses
         }
 
         [TestMethod]
+        public void CurrentUICulture_ChangeToNotSupportedCulture_Changed()
+        {
+            LocalizationManager manager = LocalizationManager.Instance;
+            manager.AddProvider(new MockLocalizationProvider());
+            CultureInfo newCulture = CultureInfo.GetCultureInfo("de-DE");
+
+            manager.CurrentUICulture = newCulture;
+
+            Assert.AreEqual(newCulture, manager.CurrentUICulture);
+        }
+
+        [TestMethod]
+        public void CultureService_Change_ServiceChanged()
+        {
+            LocalizationManager manager = LocalizationManager.Instance;
+            ICultureService newService = new MockCultureService();
+
+            manager.CultureService = newService;
+
+            Assert.AreEqual(newService, manager.CultureService);
+        }
+
+        [TestMethod]
         public void AddProvider_ProviderIsNull_Throw()
         {
             LocalizationManager manager = LocalizationManager.Instance;

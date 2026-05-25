@@ -7,7 +7,7 @@ namespace KebabGGbab.Localization.Manager
     {
         public static LocalizationManager Instance { get; } = new();
 
-        // List<T>, а не HashSet<T> для того, чтобы можно было предсказать, какой провайдер используется первым
+        // List<T>, а не HashSet<T> для того, чтобы можно было предсказать очередь провайдеров
         private readonly List<ILocalizationProvider> _providers;
 
         public ICultureService CultureService
@@ -21,6 +21,7 @@ namespace KebabGGbab.Localization.Manager
             }
         }
 
+        // Можно изменить культуру на ту, что не поддерживается, потому что у вас должна быть культура поумолчанию.
         public CultureInfo CurrentUICulture
         {
             get => CultureService.CurrentUICulture;
