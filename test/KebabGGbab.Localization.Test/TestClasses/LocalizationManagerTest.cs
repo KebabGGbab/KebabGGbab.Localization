@@ -90,6 +90,20 @@ namespace KebabGGbab.Localization.Test.TestClasses
             Assert.Contains(providerTwo, manager.Providers);
         }
 
+        
+        [TestMethod]
+        public void AddProvider_AddOneProviderMultipleTimes_AddedOnlyOne()
+        {
+            LocalizationManager manager = LocalizationManager.Instance;
+            MockLocalizationProvider provider = new();
+
+            manager.AddProvider(provider);
+            manager.AddProvider(provider);
+
+            Assert.ContainsSingle(manager.Providers);
+            Assert.Contains(provider, manager.Providers);
+        }
+
         [TestMethod]
         public void RemoveProvider_ProviderIsNull_Throw()
         {

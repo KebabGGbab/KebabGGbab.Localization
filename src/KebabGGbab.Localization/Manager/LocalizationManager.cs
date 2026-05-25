@@ -7,6 +7,7 @@ namespace KebabGGbab.Localization.Manager
     {
         public static LocalizationManager Instance { get; } = new();
 
+        // List<T>, а не HashSet<T> для того, чтобы можно было предсказать, какой провайдер используется первым
         private readonly List<ILocalizationProvider> _providers;
 
         public ICultureService CultureService
@@ -65,6 +66,11 @@ namespace KebabGGbab.Localization.Manager
         public void AddProvider(ILocalizationProvider provider)
         {
             ArgumentNullException.ThrowIfNull(provider);
+            
+            if (_providers.Contains(provider))
+            {
+                return;
+            }
 
             _providers.Add(provider);
         }
