@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using KebabGGbab.Localization.CultureService;
 using KebabGGbab.Localization.Exceptions;
 using KebabGGbab.Localization.Manager;
 using KebabGGbab.Localization.Providers;
@@ -7,37 +8,42 @@ using KebabGGbab.Localization.Test.Mocks;
 namespace KebabGGbab.Localization.Test.TestClasses
 {
     [TestClass]
+    [DoNotParallelize]
     public sealed class LocalizationManagerTest
     {
+        private readonly static CultureInfo _defaultCulture = CultureInfo.CurrentCulture;
+        private readonly static ICultureService _defaultCultureService = LocalizationManager.Instance.CultureService;
+
+        [TestCleanup]
+        public void TestTearDown()
+        {
+            CultureInfo.CurrentUICulture = _defaultCulture;
+            LocalizationManager manager = LocalizationManager.Instance;
+            manager.CurrentUICulture = _defaultCulture;
+            manager.CultureService = _defaultCultureService;
+
+            foreach (ILocalizationProvider provider in manager.Providers.ToList())
+            {
+                manager.RemoveProvider(provider);
+            }
+        }
+
         [TestMethod]
-        public void Ctor_WithoutArguments_CultureUICultureEqualsCurrentUICultureThread()
+        public void CurrentUICulture_DefaultCultureService_CultureUICultureEqualsCurrentUICultureThread()
         {
             CultureInfo culture = CultureInfo.CurrentUICulture;
 
-            LocalizationManager manager = new();
+            LocalizationManager manager = LocalizationManager.Instance;
 
             Assert.AreEqual(culture, manager.CurrentUICulture);
         }
 
         [TestMethod]
-        public void Ctor_WithStartCultureAndCultureService_StartCultureSetInLocalizationManagerAndCultureService()
-        {
-            CultureInfo startCulture = CultureInfo.GetCultureInfo("fr-FR");
-            MockCultureService service = new();
-
-            LocalizationManager manager = new(startCulture, service);
-
-            Assert.AreEqual(startCulture, manager.CurrentUICulture);
-            Assert.AreEqual(startCulture, service.CurrentUICulture);
-        }
-
-        [TestMethod]
         public void AddProvider_ProviderIsNull_Throw()
         {
-            LocalizationManager manager = new();
-            ILocalizationProvider provider = null!;
+            LocalizationManager manager = LocalizationManager.Instance;
 
-            void action() => manager.AddProvider(provider);
+            void action() => manager.AddProvider(null!);
 
             Assert.ThrowsExactly<ArgumentNullException>(action);
         }
@@ -45,7 +51,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void AddProvider_AddOneProvider_AddedProvider()
         {
-            LocalizationManager manager = new();
+            LocalizationManager manager = LocalizationManager.Instance;
             MockLocalizationProvider providerOne = new();
 
             manager.AddProvider(providerOne);
@@ -57,27 +63,29 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void AddProvider_AddMultipleDifferentProviders_AddedAll()
         {
-            LocalizationManager manager = new();
+            LocalizationManager manager = LocalizationManager.Instance;
             MockLocalizationProvider providerOne = new();
             NameLocalizationProvider providerTwo = new();
 
             manager.AddProvider(providerOne);
             manager.AddProvider(providerTwo);
 
+            Assert.HasCount(2, manager.Providers);
             Assert.Contains(providerOne, manager.Providers);
             Assert.Contains(providerTwo, manager.Providers);
         }
 
         [TestMethod]
-        public void AddProvider_AddMultipleSameProviders_AddedAll()
+        public void AddProvider_AddMultipleSameTypeProviders_AddedAll()
         {
-            LocalizationManager manager = new();
+            LocalizationManager manager = LocalizationManager.Instance;
             MockLocalizationProvider providerOne = new();
             MockLocalizationProvider providerTwo = new();
 
             manager.AddProvider(providerOne);
             manager.AddProvider(providerTwo);
 
+            Assert.HasCount(2, manager.Providers);
             Assert.Contains(providerOne, manager.Providers);
             Assert.Contains(providerTwo, manager.Providers);
         }
@@ -85,10 +93,9 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void RemoveProvider_ProviderIsNull_Throw()
         {
-            LocalizationManager manager = new();
-            ILocalizationProvider provider = null!;
+            LocalizationManager manager = LocalizationManager.Instance;
 
-            void action() => manager.RemoveProvider(provider);
+            void action() => manager.RemoveProvider(null!);
 
             Assert.ThrowsExactly<ArgumentNullException>(action);
         }
@@ -96,10 +103,9 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void RemoveProvider_ProviderNotExist_Nothing()
         {
-            LocalizationManager manager = new();
-            MockLocalizationProvider provider = new();
+            LocalizationManager manager = LocalizationManager.Instance;
 
-            manager.RemoveProvider(provider);
+            manager.RemoveProvider(new MockLocalizationProvider());
 
             Assert.IsEmpty(manager.Providers);
         }
@@ -107,7 +113,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void RemoveProvider_ProviderExist_RemovedProvider()
         {
-            LocalizationManager manager = new();
+            LocalizationManager manager = LocalizationManager.Instance;
             MockLocalizationProvider provider = new();
             manager.AddProvider(provider);
 
@@ -119,13 +125,11 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void Cultures_AddSomeProviders_CulturesAllProviders()
         {
-            LocalizationManager manager = new();
-            MockLocalizationProvider providerOne = new();
-            NameLocalizationProvider providerTwo = new();
-            manager.AddProvider(providerOne);
-            manager.AddProvider(providerTwo);
+            LocalizationManager manager = LocalizationManager.Instance;
+            manager.AddProvider(new MockLocalizationProvider());
+            manager.AddProvider(new NameLocalizationProvider());
 
-            IEnumerable<CultureInfo> allSupportedCultures = providerOne.SupportedCultures.Concat(providerTwo.SupportedCultures);
+            IEnumerable<CultureInfo> allSupportedCultures = manager.Providers.SelectMany(p => p.SupportedCultures);
 
             CollectionAssert.AreEquivalent(allSupportedCultures.ToList(), manager.Cultures.ToList());
         }
@@ -133,7 +137,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void Cultures_CastingToList_Throw()
         {
-            LocalizationManager manager = new();
+            LocalizationManager manager = LocalizationManager.Instance;
 
             void action() => _ = (List<CultureInfo>)manager.Cultures;
 
@@ -143,7 +147,7 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void Providers_CastingToList_Throw()
         {
-            LocalizationManager manager = new();
+            LocalizationManager manager = LocalizationManager.Instance;
 
             void action() => _ = (List<ILocalizationProvider>)manager.Providers;
 
@@ -154,12 +158,12 @@ namespace KebabGGbab.Localization.Test.TestClasses
         public void CurrentUICultureChange_ChangeCulture_EventInvoked()
         {
             bool isInvoked = false;
-            MockCultureService service = new();
-            LocalizationManager manager = new(cultureService: service);
+            LocalizationManager manager = LocalizationManager.Instance;
+            manager.CultureService = new MockCultureService();
+            manager.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
             manager.CurrentUICultureChanged += (m, e) => isInvoked = true;
-            CultureInfo newCulture = CultureInfo.GetCultureInfo("ru-RU");
 
-            manager.CurrentUICulture = newCulture;
+            manager.CurrentUICulture = CultureInfo.GetCultureInfo("ru-RU");
 
             Assert.IsTrue(isInvoked);
         }
@@ -169,8 +173,9 @@ namespace KebabGGbab.Localization.Test.TestClasses
         {
             CultureInfo newCulture = CultureInfo.GetCultureInfo("ru-RU");
             CultureInfo oldCulture = CultureInfo.GetCultureInfo("fr-FR");
-            MockCultureService service = new();
-            LocalizationManager manager = new(oldCulture, service);
+            LocalizationManager manager = LocalizationManager.Instance;
+            manager.CultureService = new MockCultureService();
+            manager.CurrentUICulture = oldCulture;
             CultureInfo actualNewCulture = null!;
             CultureInfo actualOldCulture = null!;
             manager.CurrentUICultureChanged += (m, e) =>
@@ -188,14 +193,12 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void Localize_KeyIsNull_Throw()
         {
-            string key = null!;
-            MockCultureService service = new();
-            CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
-            LocalizationManager manager = new(culture, service);
-            MockLocalizationProvider provider = new();
-            manager.AddProvider(provider);
+            LocalizationManager manager = LocalizationManager.Instance;
+            manager.CurrentUICulture = CultureInfo.GetCultureInfo("fr-FR");
+            manager.CultureService = new MockCultureService();
+            manager.AddProvider(new MockLocalizationProvider());
 
-            void action() => _ = manager.Localize(key);
+            void action() => _ = manager.Localize(null!);
 
             Assert.ThrowsExactly<ArgumentNullException>(action);
         }
@@ -203,14 +206,12 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void Localize_KeyIsNotExist_Throw()
         {
-            string key = "MyKey";
-            MockCultureService service = new();
-            CultureInfo culture = CultureInfo.GetCultureInfo("en-US");
-            LocalizationManager manager = new(culture, service);
-            MockLocalizationProvider provider = new();
-            manager.AddProvider(provider);
+            LocalizationManager manager = LocalizationManager.Instance;
+            manager.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+            manager.CultureService = new MockCultureService();
+            manager.AddProvider(new MockLocalizationProvider());
 
-            void action() => _ = manager.Localize(key);
+            void action() => _ = manager.Localize("MyKey");
 
             Assert.ThrowsExactly<ResourceNotFoundException>(action);
         }
@@ -218,14 +219,12 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void Localize_KeyExist_LocalizedValue()
         {
-            string key = "1";
-            MockCultureService service = new();
-            CultureInfo culture = CultureInfo.GetCultureInfo("en-US");
-            LocalizationManager manager = new(culture, service);
-            MockLocalizationProvider provider = new();
-            manager.AddProvider(provider);
+            LocalizationManager manager = LocalizationManager.Instance;
+            manager.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+            manager.CultureService = new MockCultureService();
+            manager.AddProvider(new MockLocalizationProvider());
 
-            string value = (string)manager.Localize(key);
+            string value = (string)manager.Localize("1");
 
             Assert.AreEqual("One", value);
         }
@@ -233,16 +232,13 @@ namespace KebabGGbab.Localization.Test.TestClasses
         [TestMethod]
         public void Localize_MultipleProvidersHaveKey_ValueReturnFirstAddedProvider()
         {
-            string key = "Name";
-            MockCultureService service = new();
-            CultureInfo culture = CultureInfo.GetCultureInfo("ru-RU");
-            LocalizationManager manager = new(culture, service);
-            MockLocalizationProvider provider = new();
-            NameLocalizationProvider secondProvider = new();
-            manager.AddProvider(provider);
-            manager.AddProvider(secondProvider);
+            LocalizationManager manager = LocalizationManager.Instance;
+            manager.CultureService = new MockCultureService();
+            manager.CurrentUICulture = CultureInfo.GetCultureInfo("ru-RU");
+            manager.AddProvider(new MockLocalizationProvider());
+            manager.AddProvider(new NameLocalizationProvider());
 
-            string value = (string)manager.Localize(key);
+            string value = (string)manager.Localize("Name");
 
             Assert.AreEqual("Имя", value);
         }

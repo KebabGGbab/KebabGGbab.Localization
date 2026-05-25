@@ -5,17 +5,29 @@ namespace KebabGGbab.Localization.Manager
 {
     public sealed class LocalizationManager : ILocalizationManager
     {
+        public static LocalizationManager Instance { get; } = new();
+
         private readonly List<ILocalizationProvider> _providers;
-        private readonly ICultureService _cultureService;
+
+        public ICultureService CultureService
+        {
+            get;
+            set
+            {
+                ArgumentNullException.ThrowIfNull(value);
+
+                field = value;
+            }
+        }
 
         public CultureInfo CurrentUICulture
         {
-            get => _cultureService.CurrentUICulture;
+            get => CultureService.CurrentUICulture;
             set
             {
                 CultureInfo oldCulture = CurrentUICulture;
                 
-                if (_cultureService.ChangeCurrentUICulture(value))
+                if (CultureService.ChangeCurrentUICulture(value))
                 {
                     CurrentUICultureChangedEventArgs args = new(value, oldCulture);
                     OnCurrentUICultureChanged(args);
@@ -27,17 +39,12 @@ namespace KebabGGbab.Localization.Manager
 
         public IReadOnlyList<CultureInfo> Cultures => _providers.SelectMany(p => p.SupportedCultures).ToList().AsReadOnly();
 
-        public event EventHandler<ILocalizationManager,CurrentUICultureChangedEventArgs>? CurrentUICultureChanged;
+        public event EventHandler<ILocalizationManager, CurrentUICultureChangedEventArgs>? CurrentUICultureChanged;
 
-        public LocalizationManager(CultureInfo? culture = null, ICultureService? cultureService = null) 
+        private LocalizationManager() 
         {
             _providers = [];
-            _cultureService = cultureService ?? new ThreadCultureService();
-
-            if (culture != null)
-            {
-                CurrentUICulture = culture;
-            }
+            CultureService = new ThreadCultureService();
         }
 
         public object Localize(string key)
@@ -46,7 +53,7 @@ namespace KebabGGbab.Localization.Manager
 
             foreach (ILocalizationProvider provider in _providers)
             {
-                if (provider.TryLocalize(key, _cultureService.CurrentUICulture, out object? result))
+                if (provider.TryLocalize(key, CultureService.CurrentUICulture, out object? result))
                 {
                     return result;
                 }
