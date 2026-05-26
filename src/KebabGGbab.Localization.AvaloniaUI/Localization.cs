@@ -10,15 +10,14 @@ namespace KebabGGbab.Localization.AvaloniaUI
 
         public Localization(string key)
         {
+            ArgumentNullException.ThrowIfNull(key);
+
             Key = key;
         }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            IRootObjectProvider? root = (IRootObjectProvider?)serviceProvider.GetService(typeof(IRootObjectProvider));
-            ArgumentNullException.ThrowIfNull(root, nameof(root));
-
-            TopLevel topLevel = (TopLevel)root.RootObject;
+            TopLevel topLevel = (TopLevel)serviceProvider.GetService(typeof(IRootObjectProvider))!;
             LocalizationListener listener = new(topLevel, Key);
             Binding binding = new()
             {

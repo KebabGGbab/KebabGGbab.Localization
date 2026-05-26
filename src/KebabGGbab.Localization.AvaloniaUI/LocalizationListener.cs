@@ -28,6 +28,8 @@ namespace KebabGGbab.Localization.AvaloniaUI
 
         public LocalizationListener(TopLevel root, string key)
         {
+            ArgumentNullException.ThrowIfNull(key);
+
             Key = key;
             Value = GetValue();
             _root = root;
