@@ -61,11 +61,11 @@ namespace KebabGGbab.Localization.AvaloniaUI.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Resource placeholder &quot;{0}&quot;..
+        ///   Ищет локализованную строку, похожую на Resource placeholder &apos;{0}&apos;..
         /// </summary>
-        internal static string ResourcePlaceholder {
+        internal static string LocalizationListenerPlaceholderFormat {
             get {
-                return ResourceManager.GetString("ResourcePlaceholder", resourceCulture);
+                return ResourceManager.GetString("LocalizationListenerPlaceholderFormat", resourceCulture);
             }
         }
     }

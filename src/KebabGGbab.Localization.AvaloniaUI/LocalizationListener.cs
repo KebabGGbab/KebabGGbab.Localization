@@ -1,12 +1,13 @@
 ﻿using System.Globalization;
 using System.Text;
 using Avalonia.Controls;
+using KebabGGbab.Localization.AvaloniaUI.Resources;
 
 namespace KebabGGbab.Localization.AvaloniaUI
 {
     public class LocalizationListener : ObservableObject
     {
-        private static readonly CompositeFormat _resourcePlaceholder = CompositeFormat.Parse(S_LocalizationService.ResourcePlaceholder);
+        private static readonly CompositeFormat _resourcePlaceholder = CompositeFormat.Parse(Strings.LocalizationListenerPlaceholderFormat);
         
         private readonly TopLevel _root;
 
