@@ -1,4 +1,7 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Avalonia.Controls;
 using KebabGGbab.Localization.AvaloniaUI.Resources;
@@ -7,7 +10,7 @@ using KebabGGbab.Localization.Manager;
 
 namespace KebabGGbab.Localization.AvaloniaUI
 {
-    public class LocalizationListener : ObservableObject
+    public class LocalizationListener : INotifyPropertyChanged
     {
         private static readonly CompositeFormat _resourcePlaceholder = CompositeFormat.Parse(Strings.LocalizationListenerPlaceholderFormat);
         
@@ -19,15 +22,17 @@ namespace KebabGGbab.Localization.AvaloniaUI
 
         public object? Value 
         {
-            get => field;
+            get;
             private set => SetProperty(ref field, value);
         }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public LocalizationListener(TopLevel root, string key, string[]? arguments = null)
         {
             Key = key;
             Arguments = arguments;
-            LocalizeValue();
+            Value = GetValue();
             _root = root;
             _root.Closed += Root_Closed;
             LocalizationManager.Instance.CurrentUICultureChanged += OnCurrentUICultureChanged;
@@ -35,10 +40,10 @@ namespace KebabGGbab.Localization.AvaloniaUI
 
         private void OnCurrentUICultureChanged(ILocalizationManager sender, CurrentUICultureChangedEventArgs e)
         {
-            LocalizeValue();
+            Value = GetValue();
         }
 
-        private void LocalizeValue()
+        private object GetValue()
         {
             try
             {
@@ -46,16 +51,16 @@ namespace KebabGGbab.Localization.AvaloniaUI
 
                 if (value is string str && Arguments != null)
                 {
-                    Value = string.Format(str, Arguments);
+                    return string.Format(str, Arguments);
                 }
                 else
                 {
-                    Value = value;
+                    return value;
                 }
             }
             catch (ResourceNotFoundException ex)
             {
-                Value = string.Format(CultureInfo.InvariantCulture, _resourcePlaceholder, ex.Key);
+                return string.Format(CultureInfo.InvariantCulture, _resourcePlaceholder, ex.Key);
             }
         }
 
@@ -63,6 +68,31 @@ namespace KebabGGbab.Localization.AvaloniaUI
         {
             _root.Closed -= Root_Closed;
             LocalizationManager.Instance.CurrentUICultureChanged -= OnCurrentUICultureChanged;
+        }
+
+        private bool SetProperty<T>([NotNullIfNotNull(nameof(newValue))] ref T field, T newValue, [CallerMemberName] string? propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, newValue))
+            {
+                return false;
+            }
+
+            field = newValue;
+            OnPropertyChanged(propertyName);
+
+            return true;
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            ArgumentNullException.ThrowIfNull(args);
+
+            PropertyChanged?.Invoke(this, args);
         }
     }
 }
