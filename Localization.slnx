@@ -7,6 +7,7 @@
     <File Path="global.json" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="src/KebabGGbab.Localization.AvaloniaUI/KebabGGbab.Localization.AvaloniaUI.csproj" Id="30c81b21-7af1-4726-8b9a-11b5cc15db1c" />
     <Project Path="src/KebabGGbab.Localization.WPF/KebabGGbab.Localization.WPF.csproj" Id="4effa5dd-bc88-45ee-8769-d693ad0cb3d3" />
     <Project Path="src/KebabGGbab.Localization/KebabGGbab.Localization.csproj" />
   </Folder>
