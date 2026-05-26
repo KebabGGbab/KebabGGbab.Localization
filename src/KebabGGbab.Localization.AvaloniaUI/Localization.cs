@@ -2,7 +2,7 @@
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 
-namespace KebabGGbab.Avalonia.Extensions.Services.Localization
+namespace KebabGGbab.Localization.AvaloniaUI
 {
     public class Localization : MarkupExtension
     {

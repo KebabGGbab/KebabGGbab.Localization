@@ -1,12 +1,8 @@
 ﻿using System.Globalization;
 using System.Text;
 using Avalonia.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
-using KebabGGbab.Avalonia.Extensions.Resources.Strings;
-using KebabGGbab.Localization;
-using KebabGGbab.Localization.Abstractions;
 
-namespace KebabGGbab.Avalonia.Extensions.Services.Localization
+namespace KebabGGbab.Localization.AvaloniaUI
 {
     public class LocalizationListener : ObservableObject
     {
