@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/KebabGGbab.Localization.Samples.WPF/KebabGGbab.Localization.Samples.WPF.csproj" Id="74d693b3-1777-44dc-b88f-5fa5ed61d179" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
     <File Path="global.json" />
