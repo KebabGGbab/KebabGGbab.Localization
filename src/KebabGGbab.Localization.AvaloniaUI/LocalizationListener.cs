@@ -18,8 +18,6 @@ namespace KebabGGbab.Localization.AvaloniaUI
 
         public string Key { get; }
 
-        public string[]? Arguments { get; }
-
         public object? Value 
         {
             get;
@@ -28,10 +26,9 @@ namespace KebabGGbab.Localization.AvaloniaUI
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public LocalizationListener(TopLevel root, string key, string[]? arguments = null)
+        public LocalizationListener(TopLevel root, string key)
         {
             Key = key;
-            Arguments = arguments;
             Value = GetValue();
             _root = root;
             _root.Closed += Root_Closed;
@@ -47,16 +44,7 @@ namespace KebabGGbab.Localization.AvaloniaUI
         {
             try
             {
-                object value = LocalizationManager.Instance.Localize(Key);
-
-                if (value is string str && Arguments != null)
-                {
-                    return string.Format(str, Arguments);
-                }
-                else
-                {
-                    return value;
-                }
+                return LocalizationManager.Instance.Localize(Key);
             }
             catch (ResourceNotFoundException ex)
             {

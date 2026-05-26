@@ -8,12 +8,6 @@ namespace KebabGGbab.Localization.AvaloniaUI
     {
         public required string Key { get; set; }
 
-        public string[]? Arguments { get; set; }
-
-        public Localization()
-        {
-        }
-
         public Localization(string key)
         {
             Key = key;
@@ -25,7 +19,7 @@ namespace KebabGGbab.Localization.AvaloniaUI
             ArgumentNullException.ThrowIfNull(root, nameof(root));
 
             TopLevel topLevel = (TopLevel)root.RootObject;
-            LocalizationListener listener = new(topLevel, Key, Arguments);
+            LocalizationListener listener = new(topLevel, Key);
             Binding binding = new()
             {
                 Source = listener,
