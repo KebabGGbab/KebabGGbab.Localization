@@ -2,6 +2,8 @@
 using System.Text;
 using Avalonia.Controls;
 using KebabGGbab.Localization.AvaloniaUI.Resources;
+using KebabGGbab.Localization.Exceptions;
+using KebabGGbab.Localization.Manager;
 
 namespace KebabGGbab.Localization.AvaloniaUI
 {
