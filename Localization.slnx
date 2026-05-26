@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/samples/">
+    <Project Path="samples/KebabGGbab.Localization.Samples.AvaloniaUI/KebabGGbab.Localization.Samples.AvaloniaUI.csproj" Id="a2e3d178-bfac-46a2-bc55-63cbcb47d847" />
     <Project Path="samples/KebabGGbab.Localization.Samples.WPF/KebabGGbab.Localization.Samples.WPF.csproj" Id="74d693b3-1777-44dc-b88f-5fa5ed61d179" />
   </Folder>
   <Folder Name="/Solution Items/">
