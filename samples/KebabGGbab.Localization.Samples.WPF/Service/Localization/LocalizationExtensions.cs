@@ -1,8 +1,9 @@
 ﻿using System.Globalization;
 using KebabGGbab.Localization.Samples.WPF.Resources;
+using KebabGGbab.Localization.WPF;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace KebabGGbab.Localization.Samples.WPF.Extensions
+namespace KebabGGbab.Localization.Samples.WPF.Service.Localization
 {
     public static class LocalizationExtensions
     {
@@ -10,7 +11,7 @@ namespace KebabGGbab.Localization.Samples.WPF.Extensions
         {
             ArgumentNullException.ThrowIfNull(services);
 
-            services.AddLocalization();
+            services.AddLocalization(cultureService: new DispatcherCultureService());
             services.AddResxLocalization(StringsUI.ResourceManager, [CultureInfo.GetCultureInfo("ru-RU"), CultureInfo.GetCultureInfo("en-US")]);
 
             return services;
