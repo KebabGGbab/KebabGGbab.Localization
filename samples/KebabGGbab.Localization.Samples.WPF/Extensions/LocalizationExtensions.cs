@@ -6,7 +6,7 @@ namespace KebabGGbab.Localization.Samples.WPF.Extensions
 {
     public static class LocalizationExtensions
     {
-        public static IServiceCollection AddLocalizationWithResx(this ServiceCollection services)
+        public static IServiceCollection AddLocalizationWithResx(this IServiceCollection services)
         {
             ArgumentNullException.ThrowIfNull(services);
 
