@@ -11,7 +11,7 @@ namespace KebabGGbab.Localization.Samples.WPF.Service.Localization
         {
             ArgumentNullException.ThrowIfNull(services);
 
-            services.AddLocalization(cultureService: new DispatcherCultureService());
+            services.AddLocalizationWPF();
             services.AddResxLocalization(StringsUI.ResourceManager, [CultureInfo.GetCultureInfo("ru-RU"), CultureInfo.GetCultureInfo("en-US")]);
 
             return services;
