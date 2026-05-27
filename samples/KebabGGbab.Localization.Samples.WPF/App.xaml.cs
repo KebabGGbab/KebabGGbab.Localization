@@ -1,5 +1,6 @@
 ﻿using System.Windows;
-using KebabGGbab.Localization.Samples.WPF.Extensions;
+using KebabGGbab.Localization.Samples.Shared.ViewModels;
+using KebabGGbab.Localization.Samples.WPF.Service.Localization;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KebabGGbab.Localization.Samples.WPF
@@ -18,6 +19,7 @@ namespace KebabGGbab.Localization.Samples.WPF
         private static void ConfigureServices(ServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
+            services.AddSingleton<MainViewModel>();
             services.AddLocalizationWithResx();
         }
 

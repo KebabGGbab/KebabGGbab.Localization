@@ -61,11 +61,38 @@ namespace KebabGGbab.Localization.Samples.WPF.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Apply.
+        /// </summary>
+        internal static string ButtonApply {
+            get {
+                return ResourceManager.GetString("ButtonApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Hello Window!.
         /// </summary>
         internal static string MainWindowTitle {
             get {
                 return ResourceManager.GetString("MainWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Current UI culture:.
+        /// </summary>
+        internal static string TextBlockCurrentUICulture {
+            get {
+                return ResourceManager.GetString("TextBlockCurrentUICulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Selected a UI culture:.
+        /// </summary>
+        internal static string TextBlockSelectedUICulture {
+            get {
+                return ResourceManager.GetString("TextBlockSelectedUICulture", resourceCulture);
             }
         }
     }

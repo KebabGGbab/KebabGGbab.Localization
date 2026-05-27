@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using KebabGGbab.Localization.Samples.Shared.ViewModels;
 
 namespace KebabGGbab.Localization.Samples.WPF
 {
@@ -7,8 +8,9 @@ namespace KebabGGbab.Localization.Samples.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainViewModel vm)
         {
+            DataContext = vm;
             InitializeComponent();
         }
     }

@@ -5,9 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KebabGGbab.Localization.Samples.WPF"
         xmlns:l="clr-namespace:KebabGGbab.Localization.WPF;assembly=KebabGGbab.Localization.WPF"
+        xmlns:vm="clr-namespace:KebabGGbab.Localization.Samples.Shared.ViewModels;assembly=KebabGGbab.Localization.Samples.Shared" 
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         mc:Ignorable="d"
         Title="{l:Localization MainWindowTitle}" Height="450" Width="800">
-    <Grid>
 
-    </Grid>
+
+    <StackPanel Orientation="Vertical">
+
+        <Grid ColumnDefinitions="auto, 200" RowDefinitions="auto, auto">
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                        Text="{l:Localization TextBlockCurrentUICulture}" />
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                        Text="{Binding Path=CurrentUICulture}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                        Text="{l:Localization TextBlockSelectedUICulture}" />
+            <ComboBox Grid.Row="1" Grid.Column="1"
+                        ItemsSource="{Binding Path=SupportedUICultures}"
+                        SelectedItem="{Binding Path=SelectedUICulture}" />
+
+
+        </Grid>
+
+        <Button Content="{l:Localization ButtonApply}"
+                Command="{Binding Path=ChangeUICultureCommand}"
+                CommandParameter="{Binding Path=SelectedUICulture}" />
+
+    </StackPanel>
+
 </Window>
