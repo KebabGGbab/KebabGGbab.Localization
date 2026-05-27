@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\KebabGGbab.Localization.AvaloniaUI\KebabGGbab.Localization.AvaloniaUI.csproj" />
+    <ProjectReference Include="..\KebabGGbab.Localization.Samples.Shared\KebabGGbab.Localization.Samples.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

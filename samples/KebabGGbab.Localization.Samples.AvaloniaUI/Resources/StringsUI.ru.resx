@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ButtonApply" xml:space="preserve">
-    <value>Apply</value>
+    <value>Применить</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
-    <value>Hello Window!</value>
+    <value>Привет, окно!</value>
   </data>
   <data name="TextBlockCurrentUICulture" xml:space="preserve">
-    <value>Current UI culture:</value>
+    <value>Текущая культура UI:</value>
   </data>
   <data name="TextBlockSelectedUICulture" xml:space="preserve">
-    <value>Selected a UI culture:</value>
+    <value>Выбранная культура UI:</value>
   </data>
 </root>

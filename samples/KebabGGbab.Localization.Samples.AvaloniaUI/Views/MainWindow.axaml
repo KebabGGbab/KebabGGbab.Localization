@@ -3,7 +3,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="https://github.com/KebabGGbab"
+        xmlns:vm="using:KebabGGbab.Localization.Samples.Shared.ViewModels"
+        x:DataType="vm:MainViewModel"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="KebabGGbab.Localization.Samples.AvaloniaUI.MainWindow"
         Title="{l:Localization MainWindowTitle}">
+
+        <StackPanel Orientation="Vertical">
+
+        <Grid ColumnDefinitions="auto, 200" RowDefinitions="auto, auto">
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                        Text="{l:Localization TextBlockCurrentUICulture}" />
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                        Text="{Binding Path=CurrentUICulture}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                        Text="{l:Localization TextBlockSelectedUICulture}" />
+            <ComboBox Grid.Row="1" Grid.Column="1"
+                        ItemsSource="{Binding Path=SupportedUICultures}"
+                        SelectedItem="{Binding Path=SelectedUICulture}" />
+
+
+        </Grid>
+
+        <Button Content="{l:Localization ButtonApply}"
+                Command="{Binding Path=ChangeUICultureCommand}"
+                CommandParameter="{Binding Path=SelectedUICulture}" />
+
+    </StackPanel>
+
 </Window>
