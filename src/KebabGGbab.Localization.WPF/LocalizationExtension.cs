@@ -21,8 +21,6 @@ namespace KebabGGbab.Localization.WPF
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             ArgumentNullException.ThrowIfNull(serviceProvider);
-            IProvideValueTarget? target = (IProvideValueTarget?)serviceProvider.GetService(typeof(IProvideValueTarget));
-            ArgumentNullException.ThrowIfNull(target);
 
             LocalizationListener listener = new(Key);
             Binding binding = new()
