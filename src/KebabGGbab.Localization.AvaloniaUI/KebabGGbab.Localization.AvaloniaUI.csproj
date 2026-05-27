@@ -6,6 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<!-- NuGet -->
+	<PropertyGroup>
+		<PackageId>KebabGGbab.Localization.AvaloniaUI</PackageId>
+		<Title>KebabGGbab.Localization.AvaloniaUI</Title>
+		<Product>KebabGGbab.Localization.AvaloniaUI</Product>
+	</PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="12.0.3" />
   </ItemGroup>

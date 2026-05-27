@@ -7,6 +7,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+	<!-- NuGet -->
+	<PropertyGroup>
+		<PackageId>KebabGGbab.Localization.WPF</PackageId>
+		<Title>KebabGGbab.Localization.WPF</Title>
+		<Product>KebabGGbab.Localization.WPF</Product>
+	</PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\KebabGGbab.Localization\KebabGGbab.Localization.csproj" />
   </ItemGroup>

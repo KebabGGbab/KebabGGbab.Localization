@@ -1,0 +1,33 @@
+﻿<Project>
+	
+	<!-- NuGet -->
+	<PropertyGroup>
+		<Version>1.0.0</Version>
+		<Authors>Fedotov Artem (@KebabGGbab)</Authors>
+		<Company>KebabGGbab</Company>
+		<Description>Localization WPF and AvaloniaUI application</Description>
+		<Copyright>Copyright (c) KebabGGbab 2026</Copyright>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/KebabGGbab/Localization</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>kebabggbab;localization;local;wpf;avaloniaui;</PackageTags>
+		<PackageReleaseNotes>Initialization of the Core project, as well as projects for the WPF and AvaloniaUI frameworks. Support for the following features: changing the current UI culture, culture service, UI culture change notifications, adding multiple localization providers, and localization via XAML markup extensions.</PackageReleaseNotes>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\img\icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	
+</Project>
