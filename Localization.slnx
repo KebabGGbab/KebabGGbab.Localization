@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/.github/" />
+  <Folder Name="/.github/workflows/">
+    <File Path=".github/workflows/ci-cd.yml" />
+  </Folder>
   <Folder Name="/img/">
     <File Path="img/icon.png" />
   </Folder>

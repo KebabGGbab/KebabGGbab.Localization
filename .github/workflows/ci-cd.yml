@@ -1,0 +1,51 @@
+name: CI/CD
+run-name: ${{ github.EVENT_NAME }} by ${{ github.ACTOR }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ release ]
+  pull_request:
+    branches: [ release ]
+
+env:
+  DOTNET_VERSION: '10.0.x'
+
+jobs:
+  build-test-publish:
+    name: Build-Test-Publish
+    runs-on: windows-latest
+    permissions:
+      id-token: write
+
+    steps:
+    - name: Clone repository
+      uses: actions/checkout@v6
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Test
+      run: dotnet test --test-modules ./test/**/*.Test.dll --no-build --verbosity normal
+
+      # NuGet
+
+    - name: NuGet login
+      id: nuget-login
+      uses: NuGet/login@v1
+      with:
+        user: ${{ secrets.NUGET_USER_NAME }}
+    
+    - name: NuGet pack
+      run: dotnet pack
+
+    - name: NuGet push
+      run: dotnet nuget push src/**/bin/Release/*.nupkg --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --skip-duplicate
