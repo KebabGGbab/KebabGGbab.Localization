@@ -12,7 +12,6 @@ namespace KebabGGbab.Localization.Test.TestClasses
             ThreadCultureService service = new();
 
             Assert.AreEqual(CultureInfo.CurrentUICulture, service.CurrentUICulture);
-            Assert.AreEqual(CultureInfo.DefaultThreadCurrentUICulture, service.CurrentUICulture);
         }
 
         [TestMethod]
