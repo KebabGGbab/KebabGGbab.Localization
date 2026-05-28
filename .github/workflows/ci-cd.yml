@@ -34,7 +34,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Test
-      run: dotnet test --test-modules ./test/**/*.Test.dll --no-build --verbosity normal
+      run: dotnet test --test-modules ./test/**/*.Test.exe --no-build --verbosity normal
 
       # NuGet
 
